@@ -1,0 +1,2 @@
+Running time is 106.561071 second.
+>> 

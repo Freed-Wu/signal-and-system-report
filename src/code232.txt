@@ -1,0 +1,3 @@
+f_c is 1.073920 kHz.
+Running time is 0.222985 second.
+>> 

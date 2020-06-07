@@ -1,0 +1,387 @@
+% Fakesection 序言之前
+\RequirePackage[l2tabu, orthodox]{nag}
+\RequirePackage{ifxetex}
+\RequireXeTeX
+\documentclass{ctexrep}
+%颜色
+\usepackage{xcolor}
+%长度
+\usepackage{printlen}
+\uselengthunit{mm}
+%图形
+\usepackage{pifont}
+\usepackage{ean13isbn}
+\usepackage{qrcode}
+\usepackage{pdfpages}
+\usepackage{overpic}
+\usepackage{graphicx}
+\graphicspath{{./src/}}
+\usepackage{media9}
+\usepackage{wallpaper}
+\usepackage{wrapfig}
+%表格
+\usepackage{tabu}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{diagbox}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{fancybox}
+\usepackage{colortbl}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\tcbuselibrary{theorems}
+\tcbuselibrary{listings}
+\tcbuselibrary{xparse}
+\tcbuselibrary{minted}% 用minted排版代码
+\usepackage{fvextra}
+\usepackage{csvsimple}
+\usepackage{boxedminipage2e}
+%公式
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{amsopn}
+\usepackage{amstext}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{textcomp}
+\usepackage{latexsym}
+\usepackage{exscale}
+\usepackage{relsize}
+%\usepackage{xymtex}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{hologo}
+\usepackage{cases}
+%文字
+\usepackage{csquotes}
+\usepackage{microtype}
+%正文
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{lastpage}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\renewcommand\arraystretch{1.5}
+%非正文
+\usepackage{makeidx}
+\makeindex
+\usepackage{epigraph}
+\usepackage{varwidth}
+\usepackage{exercise}
+\usepackage{tasks}
+%参考文献
+\usepackage{morewrites}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage[resetlabels]{multibib}
+%标题
+\usepackage{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{andtable}%
+{#1#2~\&~\tablename\thetable}
+\newcounter{sub}
+%其它
+\usepackage{atbegshi}
+\usepackage{lipsum}
+\csname
+endofdump
+\endcsname
+%非正文
+\renewcommand{\ExerciseName}{问题}
+\renewcommand{\AnswerName}{回答}
+\renewcommand{\listexercisename}{\Huge 问题}
+\numberwithin{Exercise}{chapter}
+\numberwithin{Answer}{chapter}
+%代码
+\usepackage{minted}
+\usepackage{boxie}
+\makeatletter
+\xdefinecolor{tcbcol@back}{rgb}{0,0,0}
+\makeatother
+\usepackage{tikz}
+%%MatLab命令行
+\newcommand{\MatlabLogo}{%
+	\begin{tikzpicture}[x=2.4ex,y=2.4ex,line width=0ex,scale=1]
+		\node[draw,fill=white,text=white] at (0, 0) (a) {
+				\includegraphics[width=2.4ex]{matlabLogo.ai}
+			};
+	\end{tikzpicture}
+}
+\tcbset{%
+	skin=enhanced,%
+	matlab/.style={%
+		skin=bicolor,%
+		boxrule=0.1mm,%
+		%toptitle=1ex,
+		sharp corners,
+		breakable,%
+		colbacktitle=WinGray,%
+		colframe=WinGray,%
+		coltitle=black,%
+		fonttitle=\sffamily,%\bfseries,
+		fontupper=\small\sffamily,
+		fontlower=\small\sffamily,
+		frame style={%
+			draw=WinBlue,%
+			left color=WinBlue,%
+			right color=WinBlue%
+		},%
+		overlay unbroken = {%
+			\node[inner sep=0pt,anchor=north west,yshift=-3pt,xshift=1.2pt,text=black]
+			at (frame.north west){\MatlabLogo};% \fbox{\faTerminal}
+			\node[inner sep=0pt,anchor=north east,yshift=-3pt,xshift=-8pt,text=black] at (frame.north
+			east){\rule{0.8em}{0.6pt}\quad$\square$\quad{\Large$\times$}};
+		},%
+		overlay first = {%
+			\node[inner sep=0pt,anchor=north west,yshift=-3pt,xshift=1.0pt,text=black]
+			at (frame.north west){\MatlabLogo};%\small ~\faWindows
+			\node[inner sep=0pt,anchor=north east,yshift=-3pt,xshift=-8pt,text=black] at (frame.north
+			east){\rule{0.8em}{0.6pt}\quad$\square$\quad{\Large$\times$}};
+		}%
+	},
+	matlablight/.style={
+		matlab,%
+		colback=white,%
+		colupper=black,%
+		%coltext=black%
+	},
+	matlabdark/.style={
+		matlab,%
+		colback=black,%
+		colupper=white,%
+		%coltext=white%
+	}
+}
+\DeclareTCBListing{matlabdarkc}{ m m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlabdark,%
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}
+\DeclareTCBListing{matlablightc}{ m m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlablight,%
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}
+\DeclareTCBListing{matlabdark}{ m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlabdark,%
+	title={#1},%
+	minted language=bat%
+}
+\DeclareTCBListing{matlablight}{ m }{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlablight,%
+	title={#1},%
+	minted language=bat%
+}
+\newtcbinputlisting{\matlabdarkcfile}[3]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlabdark,%
+	listing file={#3},
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}% end matlabdarkcfile
+% 将文件做为窗口内容的Windows终端窗口样式命令
+% 第1个参数是窗口底端提示信息
+% 第2个参数是窗口标题
+% 第3个参数是包含窗口内容的文件全路径名称(可以是相对路径)
+\newtcbinputlisting{\matlablightcfile}[3]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing and comment,%
+	colbacklower=tcbcol@back!5!yellow!10!white,%
+	collower=linux,%
+	matlablight,%
+	listing file={#3},
+	title={#2},%
+	comment={\small\sffamily#1},%
+	minted language=bat%
+}% end matlablightcfile
+% 将文件做为窗口内容的Windows终端窗口样式命令
+% 第1个参数是窗口标题
+% 第2个参数是包含窗口内容的文件全路径名称(可以是相对路径)
+\newtcbinputlisting{\matlabdarkfile}[2]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlabdark,%
+	listing file={#2},
+	title={#1},%
+	minted language=bat%
+}% end matlabdarkfile
+% 将文件做为窗口内容的Windows终端窗口样式命令
+% 第1个参数是窗口标题
+% 第2个参数是包含窗口内容的文件全路径名称(可以是相对路径)
+\newtcbinputlisting{\matlablightfile}[2]{%
+	listing engine=minted,%
+	minted style=trac,%
+	minted options={%
+		autogobble,%
+		breaklines,%
+		fontsize=\wuhao,%
+		baselinestretch=0.6,%
+		breaksymbolleft={},%
+		numbersep=3mm%
+	},%
+	listing only,%
+	matlablight,%
+	listing file={#2},
+	title={#1},%
+	minted language=bat%
+}% end matlablightfile
+%链接%与beamer 冲突
+\usepackage
+[	colorlinks = true,
+linkcolor = gray,
+citecolor = gray,
+backref=page
+]{hyperref}
+%枚举%与beamer 干涉
+\usepackage{enumitem}
+\setlist[enumerate, 2]
+{	fullwidth,
+	label = \alph*.,
+	font = \textup,
+	itemindent=2em
+}
+%标题%与beamer 冲突
+\usepackage{titlesec}
+\titleformat{\chapter}{\centering\Huge\bfseries}{实验\chinese{chapter}~}{0pt}{}
+%\titleformat{\section}{\centering\LARGE\bfseries}{\S\ifthenelse{\value{section}=0}{}{\thesection}~}{0pt}{}
+%\titleformat{\subsection}{\Large}{\chinese{subsection}、~}{0pt}{}
+%\titleformat{\subsubsection}{\large}{\arabic{subsubsection}.~}{0pt}{}
+\begin{document}
+% Fakesection 扉页
+\begin{titlepage}
+	\centering
+	\includegraphics[width=.8\linewidth]{NJUST.ai}
+	\vspace{20mm}
+	\textbf{\heiti\zihao{1}信号与系统}
+	\vspace{5mm}
+	\textbf{\heiti\zihao{1}实验报告}
+	\vspace{30mm}
+	\begin{spacing}{1}
+		\centering
+		\zihao{3}
+		\begin{tabu}to.8\linewidth{@{}X[4,r]@{}X[c]@{}X[12,l]@{}}
+			\makebox[4\ccwd][s]{学院}&：&\underline{\makebox[12\ccwd][c]{\kaishu{电子工程与光电技术学院}}}\\
+			\makebox[4\ccwd][s]{班号}&：&\underline{\makebox[12\ccwd][c]{\kaishu{9171040G11}}}\\
+			\makebox[4\ccwd][s]{姓名}&：&\underline{\makebox[12\ccwd][c]{\kaishu{吴振宇}}}\\
+			\makebox[4\ccwd][s]{学号}&：&\underline{\makebox[12\ccwd][c]{\kaishu{916101630117}}}\\
+			\makebox[4\ccwd][s]{同组同学}&：&\underline{\makebox[12\ccwd][c]{\kaishu{毛东兴}}}\\
+			\makebox[4\ccwd][s]{学号}&：&\underline{\makebox[12\ccwd][c]{\kaishu{9171160D0529}}}\\
+			\makebox[4\ccwd][s]{指导老师}&：&\underline{\makebox[12\ccwd][c]{\kaishu{王海青}}}
+		\end{tabu}
+	\end{spacing}
+	\vspace{10mm}
+	\zihao{3}
+	\kaishu{\today}
+\end{titlepage}
+%页眉页脚%与book冲突
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{\small{\leftmark}}
+\cfoot{\small{第\thepage 页~共~\pageref{LastPage}~页}}
+\rfoot{\small{\rightmark}}
+% Fakesection 目录
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+\listofexercises
+\newpage
+\pagenumbering{arabic}
+\include{inc/period}
+\include{inc/freq}
+\include{inc/line}
+\include{inc/sample}
+\end{document}
+

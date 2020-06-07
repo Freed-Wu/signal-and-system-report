@@ -1,0 +1,5 @@
+D: f_c is 15.915494 kHz.
+S: f_c is 7.957747 kHz.
+LC: f_c is 5.032921e-09 kHz.
+Running time is 4.881369 second.
+>> 
